@@ -6,19 +6,19 @@ import React, { useState } from "react";
 export function DatingAssistantV() {
   const [file, setFile] = useState(null);
   const [replies, setReplies] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const MAX_FILE_SIZE_MB = 3;
   const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event:any) => {
     const selectedFile = event.target.files[0];
 
     // Check if the uploaded file is an image and not larger than 3 MB
     if (selectedFile && selectedFile.type.startsWith("image/")) {
       if (selectedFile.size <= MAX_FILE_SIZE_BYTES) {
         setFile(selectedFile);
-        setError(null); // Clear any previous errors
+        setError(""); // Clear any previous errors
       } else {
         setFile(null);
         setError(
@@ -31,16 +31,6 @@ export function DatingAssistantV() {
     }
   };
 
-  const copyToClipboard = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setMessage("Copied to clipboard!");
-      setTimeout(() => setMessage(""), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
-  };
-
   const generateReplies = async () => {
     if (!file) {
       alert("Please upload a valid image file first.");
@@ -48,7 +38,7 @@ export function DatingAssistantV() {
     }
 
     const reader = new FileReader();
-    reader.onload = async (e) => {
+    reader.onload = async (e:any) => {
       const binaryData = e.target.result;
 
       try {
@@ -99,7 +89,7 @@ export function DatingAssistantV() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {replies.map((reply, index) => (
-          <Card className="rounded-lg bg-gradient-to-r from-[#F3E8FF] to-[#E5E7EB] p-6 shadow-lg dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#374151] dark:shadow-none">
+          <Card key={index} className="rounded-lg bg-gradient-to-r from-[#F3E8FF] to-[#E5E7EB] p-6 shadow-lg dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#374151] dark:shadow-none">
             <CardContent className="space-y-3 flex items-center justify-between">
               <p className="text-base font-medium text-[#4B5563] dark:text-[#E5E7EB]">
                 {reply}
@@ -116,7 +106,7 @@ export function DatingAssistantV() {
   );
 }
 
-function CopyIcon(props) {
+function CopyIcon(props:any) {
   return (
     <svg
       {...props}
@@ -136,7 +126,7 @@ function CopyIcon(props) {
   );
 }
 
-function ImageIcon(props) {
+function ImageIcon(props:any) {
   return (
     <svg
       {...props}
