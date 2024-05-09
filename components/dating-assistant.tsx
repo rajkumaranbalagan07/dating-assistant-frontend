@@ -6,19 +6,19 @@ import React, { useState } from "react";
 export function DatingAssistant() {
   const [file, setFile] = useState(null);
   const [replies, setReplies] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const MAX_FILE_SIZE_MB = 3;
   const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event:any) => {
     const selectedFile = event.target.files[0];
 
     // Check if the uploaded file is an image and not larger than 3 MB
     if (selectedFile && selectedFile.type.startsWith("image/")) {
       if (selectedFile.size <= MAX_FILE_SIZE_BYTES) {
         setFile(selectedFile);
-        setError(null); // Clear any previous errors
+        setError(""); // Clear any previous errors
       } else {
         setFile(null);
         setError(
@@ -38,7 +38,7 @@ export function DatingAssistant() {
     }
 
     const reader = new FileReader();
-    reader.onload = async (e) => {
+    reader.onload = async (e:any) => {
       const binaryData = e.target.result;
 
       try {
@@ -87,7 +87,7 @@ export function DatingAssistant() {
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {replies.map((reply, index) => (
-          <Card className="rounded-lg bg-gradient-to-r from-[#F3E8FF] to-[#E5E7EB] p-6 shadow-lg dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#374151] dark:shadow-none">
+          <Card  key={index} className="rounded-lg bg-gradient-to-r from-[#F3E8FF] to-[#E5E7EB] p-6 shadow-lg dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#374151] dark:shadow-none">
             <CardContent className="space-y-3 flex items-center justify-between">
               <p className="text-base font-medium text-[#4B5563] dark:text-[#E5E7EB]">
                 {reply}
@@ -103,7 +103,29 @@ export function DatingAssistant() {
   );
 }
 
-function ImageIcon(props) {
+
+function CopyIcon(props:any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </svg>
+  );
+}
+
+
+function ImageIcon(props:any) {
   return (
     <svg
       {...props}
