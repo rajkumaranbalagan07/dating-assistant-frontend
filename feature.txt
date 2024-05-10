@@ -1,0 +1,19 @@
+1. Work on validation
+    File Type - only image
+    File Size - 3MB
+    No of files - 1
+
+2. Set Static image At the starting 
+
+3. Click - Upload Screenshot
+
+4. Show the uploaded image
+
+5. After Upload Click Generate Replies
+
+6. Show All the 3 replies , should be able to copy 
+
+7. Should be able to re-generate replies
+
+8. On the right top show upload new image
+
